@@ -357,7 +357,7 @@ Main Script Meta:""")
                     json.dump(result['new_state'], f, indent=2)
 
                 with open("tmp-run-env.out", "w") as f:
-                    for key, val in result['new_env'].items():
+                    for key, val in (result.get('new_env') or {}).items():
                         f.write(f"""{key}="{val}"\n""")
 
             return result
