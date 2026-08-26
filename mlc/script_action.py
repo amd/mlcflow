@@ -387,27 +387,100 @@ Main Script Meta:""")
 
     Flags Available:
 
-    1. --docker_dt or --docker_detached:
+    Image build / Dockerfile options:
+    1. --docker_base_image:
+        Base image to build the Docker image from.
+    2. --docker_os:
+        Operating system for the generated Dockerfile (default: ubuntu).
+    3. --docker_os_version:
+        OS version for the generated Dockerfile.
+    4. --docker_image_name:
+        Explicit name for the built Docker image.
+    5. --docker_image_repo:
+        Custom Docker image repository name.
+    6. --docker_image_tag_extra:
+        Extra suffix appended to the image tag (default: -latest).
+    7. --docker_cache:
+        Disabling this flag forces Docker to build all layers from scratch, ignoring cached layers (default: yes).
+    8. --docker_rebuild:
+        Rebuilds the Docker image even if one with the same tag already exists (default: False).
+    9. --docker_noregenerate:
+        Skip regeneration of the Dockerfile during execution (default: False).
+    10. --docker_path:
+        Path used as the Docker build context / Dockerfile location.
+    11. --docker_gh_token:
+        GitHub token made available during the image build.
+    12. --docker_mlc_repo:
+        MLC repo to clone inside the image (default: mlcommons@mlperf-automations).
+    13. --docker_mlc_repo_branch:
+        Branch of the MLC repo to clone inside the image (default: dev).
+    14. --docker_mlc_repo_path:
+        Local path to an MLC repo to use inside the image.
+    15. --docker_skip_mlc_sys_upgrade:
+        Skip the system package upgrade step during image build.
+    16. --docker_extra_sys_deps:
+        Extra system dependencies to install during image build.
+    17. --docker_copy_files:
+        Additional files to copy into the image.
+    18. --docker_user:
+        Username to create/use inside the container (default: mlcuser).
+    19. --docker_env:
+        Environment variables to bake into the image.
+    20. --docker_build_env:
+        Environment variables used only at build time.
+    21. --docker_system_site_packages:
+        Allow the container venv to access system site-packages.
+
+    Run-time options:
+    22. --docker_dt or --docker_detached:
         Runs the specified script inside a Docker container in detached mode.
         By default, the Docker container is launched in interactive mode.
-    2. --docker_cache:
-        Disabling this flag forces Docker to build all layers from scratch, ignoring cached layers (default: yes)
-    3. --docker_rebuild:
-        Rebuilds the Docker image even if one with the same tag already exists (default: False)
-    4. --docker_noregenerate:
-        Skip regeneration of the Dockerfile during execution (default: False)
-    5. --docker_image_repo:
-        Custom Docker image repository name
-    6. --docker_verbose:
-        Enable verbose output during Docker operations
-    7. --docker_silent:
-        Suppress output during Docker operations
-    8. --docker_host_mlc_repos:
-        Mount host MLC repos inside the container
-    9. --docker_upload:
-        Push the built Docker image after execution
-    10. --docker_run_cmd_prefix:
-        Prefix to prepend to the run command inside the container
+    23. --docker_it or --docker_interactive:
+        Force interactive mode for the container.
+    24. --docker_keep_detached:
+        Keep the detached container running after the script finishes (default: False).
+    25. --docker_reuse_existing:
+        Reuse an already running container instead of starting a new one.
+    26. --docker_all_gpus:
+        Expose all host GPUs to the container.
+    27. --docker_num_gpus:
+        Number of GPUs to expose to the container.
+    28. --docker_device:
+        Host device(s) to pass into the container.
+    29. --docker_port_maps:
+        Port mappings between host and container.
+    30. --docker_shm_size:
+        Shared memory (/dev/shm) size for the container.
+    31. --docker_privileged:
+        Run the container in privileged mode.
+    32. --docker_extra_run_args:
+        Extra raw arguments appended to the docker run command.
+    33. --docker_run_cmd_prefix:
+        Prefix to prepend to the run command inside the container.
+    34. --docker_pre_run_cmds:
+        Commands to run inside the container before the main script.
+    35. --docker_skip_run_cmd:
+        Build the image but skip executing the script's run command.
+    36. --docker_pass_user_id / --docker_use_host_user_id:
+        Use the host user id inside the container (default: True).
+    37. --docker_pass_user_group / --docker_use_host_group_id:
+        Use the host group id inside the container (default: True).
+    38. --docker_use_google_dns:
+        Configure the container to use Google DNS.
+    39. --docker_host_mlc_repos:
+        Mount host MLC repos inside the container.
+    40. --docker_real_run:
+        Perform a real run instead of a fake/dry run.
+
+    Output / lifecycle options:
+    41. --docker_verbose or --docker_v:
+        Enable verbose output during Docker operations.
+    42. --docker_silent or --docker_s:
+        Suppress output during Docker operations.
+    43. --docker_upload or --docker_push_image:
+        Push the built Docker image after execution.
+    44. --docker_prune:
+        Prune Docker resources as part of the run.
 
     Example Command:
 
